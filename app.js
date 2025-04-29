@@ -1,6 +1,31 @@
 const SUPABASE_URL = 'https://qjuevskbtrycsysyzlvv.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqdWV2c2tidHJ5Y3N5c3l6bHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5NDU2OTksImV4cCI6MjA2MTUyMTY5OX0.UQharq08WsxLrhOYdjrg0nAvfeTWpfLk9rWaGMnpxzc';
 
+
+
+async function login(email, password) {
+  const { error, user } = await supabase.auth.signIn({
+    email: email,
+    password: password,
+  });
+  if (error) {
+    console.error('Erro ao fazer login:', error.message);
+  } else {
+    console.log('Usuário logado:', user);
+  }
+}
+
+
+const user = supabase.auth.user();
+if (!user) {
+  // Redirecione para a tela de login ou mostre um aviso
+  console.log('Usuário não autenticado');
+} else {
+  buscarParcelas();
+}
+
+
+
 async function buscarParcelas() {
   const response = await fetch(`${SUPABASE_URL}/rest/v1/parcelas?select=*,locatarios(nome_locatario)&order=data_vencimento.desc`, {
     method: 'GET',

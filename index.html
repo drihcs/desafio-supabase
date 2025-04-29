@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parcelas - Locatários</title>
-  <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login do Hotel</title>
+  <link rel="stylesheet" href="css/tela-login.css" />
 </head>
 <body>
+  <div class="login-container">
+    <h2>Entrar no Hotel</h2>
 
-  <div id="tela-login"></div>
-  <div id="dashboard"></div>
+    <form id="login-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Email" required />
 
-<script src="app.js"></script>
-<script src="js/tela-login.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="Senha" required />
+
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+
+    <div class="divider">
+      <span>ou</span>
+    </div>
+
+    <button class="btn-social facebook">
+      <img src="https://logopng.com.br/logos/facebook-13.png" alt="Facebook" />
+      Entrar com Facebook
+    </button>
+
+    <button class="btn-social google">
+      <img src="https://img.icons8.com/?size=512&id=17949&format=png" alt="Google" />
+      Entrar com Google
+    </button>
+
+    <div class="links">
+      <a href="#" class="forgot">Esqueceu sua senha?</a>
+      <p>Não possui conta? <a href="#" class="create">Criar uma conta</a></p>
+    </div>
+  </div>
+
+  <script src="js/tela-login.js"></script>
 </body>
 </html>

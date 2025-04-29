@@ -1,28 +1,32 @@
-const SUPABASE_URL = 'https://qjuevskbtrycsysyzlvv.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqdWV2c2tidHJ5Y3N5c3l6bHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5NDU2OTksImV4cCI6MjA2MTUyMTY5OX0.UQharq08WsxLrhOYdjrg0nAvfeTWpfLk9rWaGMnpxzc';
-
-document.getElementById('login-form').addEventListener('submit', async (e) => {
+document.getElementById('login-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
-  const erroLogin = document.getElementById('erro-login');
 
-  const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      apikey: SUPABASE_KEY
-    },
-    body: JSON.stringify({ email, password: senha })
-  });
+  const emailInput = document.getElementById('email');
+  const senhaInput = document.getElementById('senha');
+  const email = emailInput.value.trim();
+  const senha = senhaInput.value.trim();
 
-  const data = await response.json();
+  // Resetar estilos
+  emailInput.style.borderColor = '#A5D6A7';
+  senhaInput.style.borderColor = '#A5D6A7';
 
-  if (response.ok) {
-    localStorage.setItem('access_token', data.access_token);
-    localStorage.setItem('user_id', data.user.id);
-    window.location.href = 'dashboard.html';
-  } else {
-    erroLogin.textContent = 'Login inválido. Verifique seus dados.';
+  if (!email || !senha) {
+    alert('Por favor, preencha todos os campos.');
+
+    if (!email) emailInput.style.borderColor = 'red';
+    if (!senha) senhaInput.style.borderColor = 'red';
+
+    return;
   }
+
+  alert('Login simulado com sucesso! (não é um sistema real)');
+});
+
+// Botões sociais
+document.querySelector('.facebook').addEventListener('click', function() {
+  alert('Login com Facebook ainda não implementado.');
+});
+
+document.querySelector('.google').addEventListener('click', function() {
+  alert('Login com Google ainda não implementado.');
 });

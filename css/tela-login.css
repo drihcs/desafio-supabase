@@ -1,4 +1,182 @@
-    body { font-family: Arial; padding: 2rem; }
-    form { max-width: 300px; margin: auto; display: flex; flex-direction: column; gap: 1rem; }
-    input, button { padding: 0.5rem; }
-    .erro { color: red; }
+body {
+    background-color: #E8F5E9;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #2E7D32;
+  }
+  
+  form label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #2E7D32;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #A5D6A7;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #2E7D32;
+  }
+  
+  form input:focus {
+    outline: none;
+    border-color: #66BB6A;
+  }
+  
+  .btn-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #2E7D32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: white;
+    color: #333;
+    gap: 8px;
+  }
+  
+  .btn-social img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .facebook {
+    border-color: #1E88E5;
+  }
+  
+  .google {
+    border-color: #43A047;
+  }
+  
+  .divider {
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+  }
+  
+  .divider::before, .divider::after {
+    content: "";
+    height: 1px;
+    background: #C8E6C9;
+    position: absolute;
+    top: 50%;
+    width: 40%;
+  }
+  
+  .divider::before {
+    left: 0;
+  }
+  
+  .divider::after {
+    right: 0;
+  }
+  
+  .divider span {
+    background: white;
+    padding: 0 10px;
+    color: #2E7D32;
+  }
+  
+  .links {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #4A4A4A;
+  }
+  
+  .links .forgot,
+  .links .create {
+    color: #1E88E5;
+    text-decoration: none;
+  }
+  
+  .links .create {
+    font-weight: bold;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 400px) {
+    .login-container {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  
+  /* Efeito hover suave nos botões */
+  .btn-login,
+  .btn-social {
+    transition: all 0.3s ease;
+  }
+  
+  .btn-login:hover {
+    background-color: #388E3C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+  }
+  
+  .btn-social:hover {
+    transform: translateY(-2px);
+    background-color: #F1F8E9;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+  }
+  
+  /* Cores mais específicas para cada rede social ao passar o mouse */
+  .facebook:hover {
+    background-color: #E3F2FD;
+    border-color: #1565C0;
+  }
+  
+  .google:hover {
+    background-color: #E8F5E9;
+    border-color: #2E7D32;
+  }
+  
+  
+  
+  
+  /* Efeito ao clicar (pressionar) */
+  .btn-login:active,
+  .btn-social:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  
