@@ -1,4 +1,4 @@
-const SUPABASE_URL = 'https://SEU-PROJETO.supabase.cohttps://qjuevskbtrycsysyzlvv.supabase.co';
+const SUPABASE_URL = 'https://qjuevskbtrycsysyzlvv.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqdWV2c2tidHJ5Y3N5c3l6bHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5NDU2OTksImV4cCI6MjA2MTUyMTY5OX0.UQharq08WsxLrhOYdjrg0nAvfeTWpfLk9rWaGMnpxzc';
 
 async function buscarParcelas() {
