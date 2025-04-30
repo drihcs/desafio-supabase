@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Condomínio Village da Praia do Icaraí</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .card {
+      width: 300px;
+      padding: 20px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card h3 {
+      margin-bottom: 10px;
+    }
+    .card p {
+      margin: 5px 0;
+    }
+    .total {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .pending {
+      color: red;
+    }
+    .paid {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bem-vindo ao seu Dashboard!</h2>
+  <div id="card-container"></div> <!-- Card será inserido aqui -->
+
+  <script>
+    const supabase = createClient('https://qjuevskbtrycsysyzlvv.supabase.co', 'your_supabase_key'); // Substitua com sua URL e chave
+    const accessToken = localStorage.getItem('access_token');
+    
+    if (!accessToken) {
+      window.location.href = 'login.html'; // Redirecionar para login se não houver token
+    }
+
+    async function exibirInformacoesFinanceiras() {
+      try {
+        const usuario = supabase.auth.user();
+        if (!usuario) {
+          window.location.href = 'login.html'; // Redirecionar para login caso não haja usuário logado
+        }
+
+        // Buscar as parcelas do locatário logado
+        const { data, error } = await supabase
+          .from('parcelas')
+          .select('*')
+          .eq('locatario_id', usuario.id)
+          .order('data_vencimento', { ascending: true });
+
+        if (error) {
+          console.error('Erro ao buscar parcelas:', error.message);
+          return;
+        }
+
+        // Cálculos de total pago e total devido
+        let totalPago = 0;
+        let totalDevido = 0;
+        let totalAluguelPago = 0;
+        let totalCondominioPago = 0;
+        let totalAluguelDevido = 0;
+        let totalCondominioDevido = 0;
+
+        data.forEach(parcela => {
+          if (parcela.pago_aluguel) totalAluguelPago += parcela.valor_aluguel;
+          if (parcela.pago_condominio) totalCondominioPago += parcela.valor_condominio;
+          if (!parcela.pago_aluguel) totalAluguelDevido += parcela.valor_aluguel;
+          if (!parcela.pago_condominio) totalCondominioDevido += parcela.valor_condominio;
+        });
+
+        // Calcular o total pago e devido
+        totalPago = totalAluguelPago + totalCondominioPago;
+        totalDevido = totalAluguelDevido + totalCondominioDevido;
+
+        // Criação do card com as informações
+        const cardContainer = document.getElementById('card-container');
+        const card = document.createElement('div');
+        card.classList.add('card');
+        
+        card.innerHTML = `
+          <h3>Condomínio Village da Praia do Icaraí</h3>
+          <p><strong>Aluguel Pago:</strong> R$ ${totalAluguelPago.toFixed(2)}</p>
+          <p><strong>Condomínio Pago:</strong> R$ ${totalCondominioPago.toFixed(2)}</p>
+          <p class="total"><strong>Total Pago:</strong> R$ ${totalPago.toFixed(2)}</p>
+          <p><strong>Aluguel Devido:</strong> R$ ${totalAluguelDevido.toFixed(2)}</p>
+          <p><strong>Condomínio Devido:</strong> R$ ${totalCondominioDevido.toFixed(2)}</p>
+          <p class="pending"><strong>Total Devido:</strong> R$ ${totalDevido.toFixed(2)}</p>
+          
+          <p class="total">
+            ${totalDevido === 0 ? 
+              'Tudo Pago!' : 
+              `Caso pague o aluguel e condomínio juntos, você poderá ter um desconto!`}
+          </p>
+        `;
+        
+        cardContainer.appendChild(card);
+
+      } catch (error) {
+        console.error('Erro ao exibir as informações financeiras:', error.message);
+      }
+    }
+
+    // Chama a função para exibir as informações financeiras ao carregar a página
+    exibirInformacoesFinanceiras();
+  </script>
+
+</body>
+</html>
